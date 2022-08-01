@@ -3,7 +3,7 @@ interface IPunchInOutService {
   PunchOut(date: Date): Promise<void>
 }
 
-class PunchInOutService implements IPunchInOutService {
+export class PunchInOutService implements IPunchInOutService {
   constructor(private attandanceRepo: IAttandenceRepo) {
   }
 

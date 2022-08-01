@@ -1,19 +1,23 @@
+import { readFileJson, writeFileJson } from '../utils/fs';
+
 interface RepoJson {
   Attandances: Attandance[]
 }
 
-class JsonFileAttandanceRepo implements IAttandenceRepo {
-  private json: RepoJson;
+const repoJsonEmpty = { Attandances: [] };
 
-  constructor() {
-    this.json = { Attandances: [] };
+export class JsonFileAttandanceRepo implements IAttandenceRepo {
+  constructor(private filePath: string) {
   }
 
   async GetAll(): Promise<Attandance[]> {
-    return this.json.Attandances;
+    const json: RepoJson = await readFileJson(this.filePath, repoJsonEmpty);
+    return json.Attandances;
   }
 
   async Add(a: Attandance): Promise<void> {
-    this.json.Attandances.push(a);
+    const json: RepoJson = await readFileJson(this.filePath, repoJsonEmpty);
+    json.Attandances.push(a);
+    return writeFileJson(this.filePath, json);
   }
 }
