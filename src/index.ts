@@ -24,7 +24,12 @@ app.get('/punchout', (req, res) => {
 })
 
 app.get('/book', (req, res) => {
-  bookPrintService.Render(new Date(), new Date())
+  throw new Error('not impl')
+
+  const now = new Date();
+  const from = new Date(now.getFullYear(), now.getMonth())
+  const to = new Date(now.getFullYear(), (now.getMonth() + 1) % 12)
+  bookPrintService.Render(from, to);
   res.send('book')
 })
 
