@@ -1,3 +1,5 @@
+import { IAttandenceRepo } from '../repo/attandanceRepo';
+
 interface IBookPrintService {
   Render(from: Date, to: Date): Promise<void>
 }

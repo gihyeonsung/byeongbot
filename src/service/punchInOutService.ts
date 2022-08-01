@@ -1,3 +1,5 @@
+import { IAttandenceRepo } from '../repo/attandanceRepo';
+
 interface IPunchInOutService {
   PunchIn(date: Date): Promise<void>
   PunchOut(date: Date): Promise<void>

@@ -1,5 +1,3 @@
-import { IDto } from './dto';
-
 export type AttandanceType =
   | 'in'
   | 'out'

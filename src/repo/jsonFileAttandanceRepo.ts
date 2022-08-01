@@ -1,10 +1,10 @@
 import { readFileJson, writeFileJson } from '../utils/fs';
 
 import { Attandance } from '../domain/model';
-import { Attandance as AttandanceDto } from '../domain/dto';
+import { IAttandenceRepo } from './attandanceRepo';
 
 interface RepoJson {
-  Attandances: AttandanceDto[]
+  Attandances: Attandance[]
 }
 
 const repoJsonEmpty = { Attandances: [] };
