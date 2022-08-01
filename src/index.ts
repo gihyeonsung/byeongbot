@@ -1,16 +1,18 @@
 import express from 'express';
-
+import dotenv from 'dotenv';
 import { JsonFileAttandanceRepo } from './repo/jsonFileAttandanceRepo';
 import { PunchInOutService } from './service/punchInOutService';
 import { BookPrintService } from './service/bookPrintService';
 import { now } from './utils/date';
 
-const app = express()
-const port = 3000
+dotenv.config();
 
-const attandanceRepo = new JsonFileAttandanceRepo('attandances.json')
+const attandanceRepo = new JsonFileAttandanceRepo(process.env.DB_PATH ?? 'db.json')
 const punchInOutService = new PunchInOutService(attandanceRepo)
 const bookPrintService = new BookPrintService(attandanceRepo)
+
+const app = express()
+const port = 3000
 
 app.get('/punchin', (req, res) => {
   punchInOutService.PunchIn(now());
