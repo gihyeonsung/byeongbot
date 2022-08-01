@@ -1,7 +1,10 @@
 import { readFileJson, writeFileJson } from '../utils/fs';
 
+import { Attandance } from '../domain/model';
+import { Attandance as AttandanceDto } from '../domain/dto';
+
 interface RepoJson {
-  Attandances: Attandance[]
+  Attandances: AttandanceDto[]
 }
 
 const repoJsonEmpty = { Attandances: [] };
@@ -11,12 +14,12 @@ export class JsonFileAttandanceRepo implements IAttandenceRepo {
   }
 
   async GetAll(): Promise<Attandance[]> {
-    const json: RepoJson = await readFileJson(this.filePath, repoJsonEmpty);
+    const json = await readFileJson<RepoJson>(this.filePath, repoJsonEmpty);
     return json.Attandances;
   }
 
   async Add(a: Attandance): Promise<void> {
-    const json: RepoJson = await readFileJson(this.filePath, repoJsonEmpty);
+    const json = await readFileJson<RepoJson>(this.filePath, repoJsonEmpty);
     json.Attandances.push(a);
     return writeFileJson(this.filePath, json);
   }
