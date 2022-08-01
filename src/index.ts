@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import { JsonFileAttandanceRepo } from './repo/jsonFileAttandanceRepo';
 import { PunchInOutService } from './service/punchInOutService';
 import { BookPrintService } from './service/bookPrintService';
-import { now } from './utils/date';
 
 dotenv.config();
 
@@ -15,17 +14,17 @@ const app = express()
 const port = 3000
 
 app.get('/punchin', (req, res) => {
-  punchInOutService.PunchIn(now());
+  punchInOutService.PunchIn(new Date());
   res.send('punchin')
 })
 
 app.get('/punchout', (req, res) => {
-  punchInOutService.PunchOut(now());
+  punchInOutService.PunchOut(new Date());
   res.send('punchout')
 })
 
 app.get('/book', (req, res) => {
-  bookPrintService.Render(now(), now())
+  bookPrintService.Render(new Date(), new Date())
   res.send('book')
 })
 
