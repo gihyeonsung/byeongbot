@@ -15,6 +15,7 @@ export class BookPrintService implements IBookPrintService {
   //   2. in 없고 out 있는 경우, out 에서 9시간 전 in 기본값 수정
   // 4. 주어진 출석부 템플릿에 랜더 후 pdf 반환
   async Render(from: Date, to: Date): Promise<void> {
+    console.log(await this.attandanceRepo.GetAll());
     throw new Error('not implemented yet');
   }
 }

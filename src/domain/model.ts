@@ -6,4 +6,3 @@ export interface Attandance {
   type: AttandanceType
   date: Date
 }
-
