@@ -22,6 +22,14 @@ export class PunchInOutService implements IPunchInOutService {
   }
 
   async PunchOut(date: Date): Promise<void> {
+    const attandances = await this.attandanceRepo.GetAll();
+
+    const last = attandances.sort((a, b) => a.date.getTime() - b.date.getTime()).pop();
+
+    if (last && last.type != 'in') {
+      throw Error('you are not punched in punch in first: ' + JSON.stringify(last));
+    }
+
     return this.attandanceRepo.Add({ type: 'out', date: date });
   }
 }

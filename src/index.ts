@@ -16,15 +16,19 @@ const port = 3000
 app.get('/punchin', async (req, res, next) => {
   try {
     await punchInOutService.PunchIn(new Date());
-    res.status(200).send('punchin');
+    res.send('punchin');
   } catch (e) {
     next(e);
   }
 })
 
-app.get('/punchout', (req, res) => {
-  punchInOutService.PunchOut(new Date());
-  res.send('punchout')
+app.get('/punchout', async (req, res, next) => {
+  try {
+    await punchInOutService.PunchOut(new Date());
+    res.send('punchout');
+  } catch (e) {
+    next(e);
+  }
 })
 
 app.get('/book', (req, res) => {
