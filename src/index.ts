@@ -13,9 +13,13 @@ const bookPrintService = new BookPrintService(attandanceRepo)
 const app = express()
 const port = 3000
 
-app.get('/punchin', (req, res) => {
-  punchInOutService.PunchIn(new Date());
-  res.send('punchin')
+app.get('/punchin', async (req, res, next) => {
+  try {
+    await punchInOutService.PunchIn(new Date());
+    res.status(200).send('punchin');
+  } catch (e) {
+    next(e);
+  }
 })
 
 app.get('/punchout', (req, res) => {
