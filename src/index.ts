@@ -31,12 +31,16 @@ app.get('/punchout', async (req, res, next) => {
   }
 })
 
-app.get('/book', (req, res) => {
-  const now = new Date();
-  const from = new Date(now.getFullYear(), now.getMonth())
-  const to = new Date(now.getFullYear(), (now.getMonth() + 1) % 12)
-  bookPrintService.Render(from, to);
-  res.send('book')
+app.get('/book', async (req, res, next) => {
+  try {
+    const now = new Date();
+    const from = new Date(now.getFullYear(), now.getMonth())
+    const to = new Date(now.getFullYear(), (now.getMonth() + 1) % 12)
+    await bookPrintService.Render(from, to);
+    res.send('book');
+  } catch (e) {
+    next(e);
+  }
 })
 
 app.listen(port, () => {
